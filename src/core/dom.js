@@ -40,6 +40,35 @@ class Dom {
     return this
   }
 
+  get data(){
+    return this.$el.dataset
+  }
+
+  findAll(selector){
+    return this.$el.querySelectorAll(selector);
+  }
+
+  closest(selector){
+    return $(this.$el.closest(selector));
+  }
+
+  getBoundingClientRect(){
+    return this.$el.getBoundingClientRect()
+  }
+
+  css(styles={}){
+    Object
+      .keys(styles)
+      .forEach ((key)=>this.$el.style[key]= styles[key])
+  }
+
+  removeClass(name){
+    this.$el.classList.remove(name);
+  }
+
+  addClass(name){
+    this.$el.classList.add(name);
+  }
 
 }
 
