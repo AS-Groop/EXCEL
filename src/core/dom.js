@@ -21,6 +21,16 @@ class Dom {
     this.$el.removeEventListener(eventName, callback);
   }
 
+  text(text){
+    if(typeof text === 'string'){
+      this.$el.textContent = text;
+      return this
+    }
+    if(this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim()
+    }
+    return this.$el.textContent.trim()
+  }
 
   clear(){
     this.html('');
@@ -47,6 +57,26 @@ class Dom {
   findAll(selector){
     return this.$el.querySelectorAll(selector);
   }
+  find(selector){
+    return $(this.$el.querySelector(selector));
+  }
+
+  focus() {
+    this.$el.focus()
+    return this
+  }
+
+  id(parse){
+    if (parse){
+      const parser = this.id().split(':');
+
+      return {
+        col: +parser[0],
+        row: +parser[1]
+      }
+    }
+    return this.data.id
+  }
 
   closest(selector){
     return $(this.$el.closest(selector));
@@ -64,10 +94,12 @@ class Dom {
 
   removeClass(name){
     this.$el.classList.remove(name);
+    return this
   }
 
   addClass(name){
     this.$el.classList.add(name);
+    return this
   }
 
 }
